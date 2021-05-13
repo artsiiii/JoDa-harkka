@@ -1,0 +1,49 @@
+YLEISTÄ
+
+Kehitetty Google Cloud Platform ympäristössä
+Osa datan käsittelystä jupyter notebookilla ja osa web-kojelaudassa
+
+TIEDOISTOISTA
+Harjoitustyö.ipynd
+- Sisältää vaiheet: Datan keräys, jalostaminen ja kuvailu
+- Tiedostossa on myös paljon omaa testausta sekä kommentoitua koodia esimerkiksi kuvailuun ja koneoppimiseen liittyen
+- Osa koodista jätetty kommentoinniksi, jotta ajaminen on ollut nopeampaa ja ei olla vahingossa tallenettu tietoa json-tiedostoihin, jolloin ne eivät enään toimi formatoinnin mennessä pieleen
+
+MyApp.py
+- Web-kojelaudan tiedosto
+- Sisätää vaiheet: Datan jalostaminen, kuvailu, koneoppiminen ja toimeenpano
+- Toimeenpano vaihe jäi valitettavasti hieman tyngäksi, sillä olisi voinut kehittää vielä paremman pienellä vaivalla
+
+autotori_scraper.py
+- Suoritti datan keräämisen autot.tori.fi sivustolta
+- Outo rajoitus kuitenkin esti saamasta kaikkea dataa, ongelma ei kuitenkaan ollut koodissa vaan siinä kuinka sivusto oli tehty
+
+clearedCarDataWLL2.json
+- Sisältää koneoppimiseen käytetyn tiedon
+- MyApp.py käyttää myös oletuksella tätä tiedostoa
+
+muut tiedostot
+- sisältävät lähinnä välitallennuksia, joidenka avulla kehittäminen tapahtui
+
+KÄYTTÖ
+
+Jupyter Notebook ja autotori_scraper vaihe
+- Ratkaisu toimii ainoastaan autot.tori.fi sivustolle
+- Osa datan siivouksesta tehdään jupyter notebookissa esim. formatointi ja ylimääräisten kenttien poistaminen
+    - tämä voisi olla myös streamlit tiedossa, mutta se hidastaisi ratkaisua hieman ja aika loppu kesken
+    - eli ilman jupyterin ajoa ei voida saada haettua tietoa sivustolta ja siivottua sitä riittävästi, jotta sitä voitaisiin käyttää web-kojelaudassa
+
+Web-kojelauta vaihe
+- MyApp saadaan käyttöön ajamalla komentorivillä komento "streamlit run MyApp.py" oltaessa kyseisen tiedoston kanssa samassa kansiossa
+- Alussa on taulukko sekä pylväsdiagrammi, jotka antavat yleiskuvan datasta, nämä eivät kuitenkaan ole interaktiivisia
+- Pudotusvalikoiden ja liukuvalitisimien avulla on mahdollisuus siivota dataa (brändin valinnan jälkeen tulee mahdollisuus myös valita malli)
+- Kaikki valikoissa tehdyt valinnat vaikuttavat loppuun dataan
+- Valintojen jälkeen on mahdollisuus tutustua dataan eri visualisointien avulla, jotka päivittyvät aikaisemmin tehtyjen valintojen perusteella
+- Viimeisenä ominaisuuttena suorittaa lineaarinen regression yhdellä tai monella muuttujalla
+    - X muuttujaan valitaan halutut parametrit, joiden perusteella ennustus tehdään
+    - y muuttujalla valitaan taas ennustettava arvo
+- Näiden perusteella koneoppiminen määrittää, kuinka luotettavasti testidatasta voidaan tehdä ennustus scoren avulla
+- kategorisien muuttujien avulla ennustaminen sujuu, mutta kategorisen muuttujan ennustaminen ei toimi
+
+LISÄYS!
+- slackiin palautettuun versioon verrattuna tässä versiossa on mahdollisuus valita haluamansa parameterit ja ennustaa haluttua parametria

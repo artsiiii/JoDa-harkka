@@ -140,6 +140,13 @@ class interactive():
     #st.write('Select X variables for linear regression')
     
     featuresOption = st.multiselect('Select X variables:', ['brand','model','price','year','kilometer','city','lon','lat'])
+    options = []
+    
+    for x in featuresOption:
+        options.append(x) 
+    
+    
+    
     features = featuresOption
     dumFeatures = []
     
@@ -176,6 +183,21 @@ class interactive():
         y = table[y_variable]
     
     
+    values = []
+    
+    for sel in options:
+        value = st.text_input(sel + " (use correct format if variable is category -> Ford correct)")
+        if value != "":
+            if sel == "brand" or sel == "model" or sel == "city":
+                value = sel + "_" + (value)
+            elif sel == "lon" or sel == "lat":
+                value = float(value)
+            else:
+                value = int(value)
+            values.append(value)
+            
+    valuesA = np.array(values)
+        
     
     buttonModel = st.button('Start modeling')
     clf = None
@@ -187,15 +209,20 @@ class interactive():
         clf = LinearRegression().fit(X_train,y_train)
         st.write('Score:')
         st.write(clf.score(X_test,y_test))
+       
                        
     
         # Predicting
-        st.write("Predicted value: ")
+        st.write("Predicted test set value: ")
         st.write(clf.predict(X_test.iloc[-1,:].values.reshape(1,len(X_test.columns)))[0])
-        st.write("Correct value: ")
+        st.write("Correct value in test set: ")
         st.write(y_test.iloc[-1])
         
         
+       
+         # Predicting
+        st.write("Predicted value by own parameters: ")
+        st.write(clf.predict(valuesA.reshape(1,len(X_test.columns)))[0])
             
         
 
